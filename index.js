@@ -1,15 +1,14 @@
-/* globals bench, set, suite */
 'use strict';
 
 const fs = require('fs');
-const libxmljs = require('libxmljs');
 const os = require('os');
+
+const benny = require('benny');
+const libxmljs2 = require('libxmljs2');
 const parseXml = require('@rgrove/parse-xml');
 const xmldoc = require('xmldoc');
 
-console.log(`Node.js ${process.version} / ${os.type()} ${os.arch()}\n${os.cpus()[0].model}`);
-
-[
+const suites = [
   {
     name: 'Small document',
     filename: `${__dirname}/fixtures/small.xml`
@@ -24,22 +23,30 @@ console.log(`Node.js ${process.version} / ${os.type()} ${os.arch()}\n${os.cpus()
     name: 'Large document',
     filename: `${__dirname}/fixtures/large.xml`
   }
-].forEach(({ filename, name }) => {
-  let xml = fs.readFileSync(filename, { encoding: 'utf8' });
+];
 
-  suite(`${name} (${xml.length} bytes)`, () => {
-    set('delay', 100);
+console.log(`Node.js ${process.version} / ${os.type()} ${os.arch()}\n${os.cpus()[0].model}\n`);
 
-    bench('libxmljs (native)', () => {
-      libxmljs.parseXml(xml);
-    });
+for (let { filename, name } of suites) {
+  let xml = fs.readFileSync(filename, 'utf8');
 
-    bench('parse-xml', () => {
+  benny.suite(
+    `${name} (${xml.length} bytes)`,
+
+    benny.add('@rgrove/parse-xml', () => {
       parseXml(xml);
-    });
+    }),
 
-    bench('xmldoc (sax-js)', () => {
+    benny.add('libxmljs2 (native)', () => {
+      libxmljs2.parseXmlString(xml);
+    }),
+
+    benny.add('xmldoc (sax-js)', () => {
       new xmldoc.XmlDocument(xml);
-    });
-  });
-});
+    }),
+
+    benny.cycle(),
+    benny.complete(),
+    benny.complete(() => console.log())
+  );
+}
