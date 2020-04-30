@@ -7,11 +7,14 @@
     "node": ">=8.0.0"
   },
   "scripts": {
-    "benchmark": "node index.js"
+    "benchmark": "node index.js",
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "@rgrove/eslint-config": "^1.5.0",
     "@rgrove/parse-xml": "^2.0.0",
     "benny": "^3.6.14",
+    "eslint": "^6.8.0",
     "libxmljs2": "^0.25.3",
     "xmldoc": "^1.1.2"
   },
