@@ -3,6 +3,9 @@
 const fs = require('fs');
 const os = require('os');
 
+const { version: libxmljs2Version } = require('libxmljs2/package.json');
+const { version: parseXmlVersion } = require('@rgrove/parse-xml/package.json');
+const { version: xmldocVersion } = require('xmldoc/package.json');
 const benny = require('benny');
 const libxmljs2 = require('libxmljs2');
 const parseXml = require('@rgrove/parse-xml');
@@ -33,15 +36,15 @@ for (let { filename, name } of suites) {
   benny.suite(
     `${name} (${xml.length} bytes)`,
 
-    benny.add('@rgrove/parse-xml', () => {
+    benny.add(`@rgrove/parse-xml ${parseXmlVersion}`, () => {
       parseXml(xml);
     }),
 
-    benny.add('libxmljs2 (native)', () => {
+    benny.add(`libxmljs2 ${libxmljs2Version} (native)`, () => {
       libxmljs2.parseXmlString(xml);
     }),
 
-    benny.add('xmldoc (sax-js)', () => {
+    benny.add(`xmldoc ${xmldocVersion} (sax-js)`, () => {
       new xmldoc.XmlDocument(xml);
     }),
 
