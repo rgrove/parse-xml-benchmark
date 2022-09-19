@@ -11,12 +11,11 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@rgrove/eslint-config": "^2.0.0",
+    "@rgrove/eslint-config": "^5.0.0",
     "@rgrove/parse-xml": "^3.0.0",
-    "benny": "^3.6.15",
-    "eslint": "^7.18.0",
-    "libxmljs2": "^0.26.6",
-    "xmldoc": "^1.1.2"
-  },
-  "dependencies": {}
+    "benny": "^3.7.1",
+    "eslint": "^8.23.1",
+    "libxmljs2": "^0.30.1",
+    "xmldoc": "^1.2.0"
+  }
 }
