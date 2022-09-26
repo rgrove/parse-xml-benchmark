@@ -1,7 +1,6 @@
 # Benchmarks for @rgrove/parse-xml
 
-This repo contains benchmarks for [@rgrove/parse-xml](https://github.com/rgrove/parse-xml).
-See the main repo for more details.
+This repo contains benchmarks for [@rgrove/parse-xml](https://github.com/rgrove/parse-xml). See that repo for more details.
 
 ## Running Benchmarks
 

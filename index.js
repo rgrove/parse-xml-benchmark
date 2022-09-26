@@ -3,7 +3,7 @@
 const fs = require('fs');
 const os = require('os');
 
-const parseXml = require('@rgrove/parse-xml');
+const { parseXml } = require('@rgrove/parse-xml');
 const { version: parseXmlVersion } = require('@rgrove/parse-xml/package.json');
 const benny = require('benny');
 const libxmljs2 = require('libxmljs2');
