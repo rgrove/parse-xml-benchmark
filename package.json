@@ -14,9 +14,9 @@
     "@rgrove/eslint-config": "^5.0.0",
     "@rgrove/parse-xml": "^4.0.0",
     "benny": "^3.7.1",
-    "eslint": "^8.23.1",
+    "eslint": "^8.32.0",
     "fast-xml-parser": "^4.0.14",
-    "libxmljs2": "^0.30.1",
+    "libxmljs2": "^0.31.0",
     "xmldoc": "^1.2.0"
   }
 }
