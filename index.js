@@ -6,6 +6,8 @@ const os = require('os');
 const { parseXml } = require('@rgrove/parse-xml');
 const { version: parseXmlVersion } = require('@rgrove/parse-xml/package.json');
 const benny = require('benny');
+const { XMLParser: FastXmlParser } = require('fast-xml-parser');
+const { version: fastXmlParserVersion } = require('fast-xml-parser/package.json');
 const libxmljs2 = require('libxmljs2');
 const { version: libxmljs2Version } = require('libxmljs2/package.json');
 const xmldoc = require('xmldoc');
@@ -31,6 +33,11 @@ const suites = [
 console.log(`Node.js ${process.version} / ${os.type()} ${os.arch()}\n${os.cpus()[0].model}\n`);
 
 for (let { filename, name } of suites) {
+  let fastXmlParserOptions = {
+    ignoreAttributes: false,
+    processEntities: false,
+  };
+
   let xml = fs.readFileSync(filename, 'utf8');
 
   benny.suite(
@@ -38,6 +45,10 @@ for (let { filename, name } of suites) {
 
     benny.add(`@rgrove/parse-xml ${parseXmlVersion}`, () => {
       parseXml(xml);
+    }),
+
+    benny.add(`fast-xml-parser ${fastXmlParserVersion}`, () => {
+      new FastXmlParser(fastXmlParserOptions).parse(xml);
     }),
 
     benny.add(`libxmljs2 ${libxmljs2Version} (native)`, () => {
